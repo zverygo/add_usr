@@ -79,6 +79,21 @@ $CheckBoxChangePW.Size = New-Object System.Drawing.Size(15,15)
 $CheckBoxChangePW.Checked = $true
 $main_form.Controls.Add($CheckBoxChangePW)
 
+#test_start-------------------------------
+
+$ButtonClose = New-Object System.Windows.Forms.Button
+$ButtonClose.Location = New-Object System.Drawing.Size(400,40)
+$ButtonClose.Size = New-Object System.Drawing.Size(120,23)
+$ButtonClose.Text = "Close"
+$main_form.Controls.Add($ButtonClose)
+
+$ButtonClose.Add_Click(
+{
+	
+}
+)
+
+#test_end---------------------------------
 
 $Button.Add_Click(
 
