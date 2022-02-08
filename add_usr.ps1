@@ -34,6 +34,12 @@ $LabelPassword.Location  = New-Object System.Drawing.Point(10,70)
 $LabelPassword.AutoSize = $true
 $main_form.Controls.Add($LabelPassword)
 
+$LabelChangePW = New-Object System.Windows.Forms.Label
+$LabelChangePW.Text = "Need change password after first logon"
+$LabelChangePW.Location  = New-Object System.Drawing.Point(10,90)
+$LabelChangePW.AutoSize = $true
+$main_form.Controls.Add($LabelChangePW)
+
 #---------------------------------------------------
 
 $FirstName = New-Object System.Windows.Forms.TextBox
@@ -67,6 +73,13 @@ $main_form.Controls.Add($Button)
 
 #----------------------------------------------------
 
+$CheckBoxChangePW = New-Object System.Windows.Forms.CheckBox
+$CheckBoxChangePW.Location = New-Object System.Drawing.Size(400,90)
+$CheckBoxChangePW.Size = New-Object System.Drawing.Size(15,15)
+$CheckBoxChangePW.Checked = $true
+$main_form.Controls.Add($CheckBoxChangePW)
+
+
 $Button.Add_Click(
 
 {
@@ -93,7 +106,7 @@ $Button.Add_Click(
 	-MobilePhone $MobilePhone `
 	-OfficePhone $MobilePhone `
 	-EmailAddress $email.ToLower() `
-	-ChangePasswordAtLogon $true
+	-ChangePasswordAtLogon $CheckBox.Checked
 
 }
 
