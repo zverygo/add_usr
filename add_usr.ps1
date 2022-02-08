@@ -89,7 +89,7 @@ $main_form.Controls.Add($ButtonClose)
 
 $ButtonClose.Add_Click(
 {
-	
+	$main_form.Close()
 }
 )
 
