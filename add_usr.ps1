@@ -40,6 +40,12 @@ $LabelChangePW.Location  = New-Object System.Drawing.Point(10,90)
 $LabelChangePW.AutoSize = $true
 $main_form.Controls.Add($LabelChangePW)
 
+$LabelGroup = New-Object System.Windows.Forms.Label
+$LabelGroup.Text = "Add to group"
+$LabelGroup.Location  = New-Object System.Drawing.Point(10,110)
+$LabelGroup.AutoSize = $true
+$main_form.Controls.Add($LabelGroup)
+
 #---------------------------------------------------
 
 $FirstName = New-Object System.Windows.Forms.TextBox
@@ -79,7 +85,6 @@ $CheckBoxChangePW.Size = New-Object System.Drawing.Size(15,15)
 $CheckBoxChangePW.Checked = $true
 $main_form.Controls.Add($CheckBoxChangePW)
 
-#test_start-------------------------------
 
 $ButtonClose = New-Object System.Windows.Forms.Button
 $ButtonClose.Location = New-Object System.Drawing.Size(400,40)
@@ -93,7 +98,36 @@ $ButtonClose.Add_Click(
 }
 )
 
-#test_end---------------------------------
+$ComboBox = New-Object System.Windows.Forms.ComboBox
+$ComboBox.Width = 200
+$groups = Get-ADGroup -SearchBase "OU=Groups,OU=Kiev_Volmi1,DC=volmigames,DC=local" -filter * -Properties SamAccountName
+Foreach ($group in $groups)
+{
+	$ComboBox.Items.Add($group.SamAccountName);
+}
+$ComboBox.Location  = New-Object System.Drawing.Point(140,110)
+$main_form.Controls.Add($ComboBox)
+
+<#
+$ButtonClose = New-Object System.Windows.Forms.Button
+$ButtonClose.Location = New-Object System.Drawing.Size(400,70)
+$ButtonClose.Size = New-Object System.Drawing.Size(120,23)
+$ButtonClose.Text = "Test"
+$main_form.Controls.Add($ButtonClose)
+#>
+
+$ButtonClose.Add_Click(
+{
+	if ($ComboBox.Text -eq "2D")
+	{
+		Write-Host "stepan"
+	}
+	if ($ComboBox.Text -eq "3D")
+	{
+		Write-Host "nazar"
+	}
+}
+)
 
 $Button.Add_Click(
 
@@ -123,6 +157,9 @@ $Button.Add_Click(
 	-EmailAddress $email.ToLower() `
 	-ChangePasswordAtLogon $CheckBox.Checked
 
+	Add-ADGroupMember `
+	-Identity $ComboBox.Text `
+	-Members $login
 }
 
 )
