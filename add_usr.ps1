@@ -46,6 +46,12 @@ $LabelGroup.Location  = New-Object System.Drawing.Point(10,110)
 $LabelGroup.AutoSize = $true
 $main_form.Controls.Add($LabelGroup)
 
+$LabelLocation = New-Object System.Windows.Forms.Label
+$LabelLocation.Text = "Location"
+$LabelLocation.Location  = New-Object System.Drawing.Point(10,130)
+$LabelLocation.AutoSize = $true
+$main_form.Controls.Add($LabelLocation)
+
 #---------------------------------------------------
 
 $FirstName = New-Object System.Windows.Forms.TextBox
@@ -98,6 +104,8 @@ $ButtonClose.Add_Click(
 }
 )
 
+#-----------------------------------------------------
+
 $ComboBox = New-Object System.Windows.Forms.ComboBox
 $ComboBox.Width = 200
 $groups = Get-ADGroup -SearchBase "OU=Groups,OU=Kiev_Volmi1,DC=volmigames,DC=local" -filter * -Properties SamAccountName
@@ -108,13 +116,21 @@ Foreach ($group in $groups)
 $ComboBox.Location  = New-Object System.Drawing.Point(140,110)
 $main_form.Controls.Add($ComboBox)
 
+#-----------------------------------------------------
+
+$ComboBoxLocation = New-Object System.Windows.Forms.ComboBox
+$ComboBoxLocation.Width = 200
+$ComboBoxLocation.DataSource = @('Home','Office')
+$ComboBoxLocation.Location  = New-Object System.Drawing.Point(140,130)
+$main_form.Controls.Add($ComboBoxLocation)
+
 <#
 $ButtonClose = New-Object System.Windows.Forms.Button
 $ButtonClose.Location = New-Object System.Drawing.Size(400,70)
 $ButtonClose.Size = New-Object System.Drawing.Size(120,23)
 $ButtonClose.Text = "Test"
 $main_form.Controls.Add($ButtonClose)
-#>
+
 
 $ButtonClose.Add_Click(
 {
@@ -128,6 +144,7 @@ $ButtonClose.Add_Click(
 	}
 }
 )
+#>
 
 $Button.Add_Click(
 
@@ -160,6 +177,13 @@ $Button.Add_Click(
 	Add-ADGroupMember `
 	-Identity $ComboBox.Text `
 	-Members $login
+	
+	if ($ComboBoxLocation.Text -eq "Office")
+	{
+	Add-ADGroupMember `
+	-Identity "WiFi" `
+	-Members $login
+	}
 }
 
 )
