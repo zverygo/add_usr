@@ -35,7 +35,7 @@ $LabelPassword.AutoSize = $true
 $main_form.Controls.Add($LabelPassword)
 
 $LabelChangePW = New-Object System.Windows.Forms.Label
-$LabelChangePW.Text = "Need change password after first logon"
+$LabelChangePW.Text = "User must change password at next logon"
 $LabelChangePW.Location  = New-Object System.Drawing.Point(10,90)
 $LabelChangePW.AutoSize = $true
 $main_form.Controls.Add($LabelChangePW)
